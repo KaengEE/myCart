@@ -32,6 +32,10 @@ const Navbar = () => {
         <LinkWithIcon title="가입" link="/signup" emoji={memo} />
         <LinkWithIcon title="내주문" link="/myorders" emoji={order} />
         <LinkWithIcon title="로그아웃" link="/logout" emoji={lock} />
+        {/* 장바구니 */}
+        <a href="/cart" className="align_center">
+          장바구니 <p className="align_center cart_counts">0</p>
+        </a>
       </div>
     </nav>
   );
