@@ -1,4 +1,5 @@
 import "./App.css";
+import CartPage from "./components/Cart/CartPage";
 import { HomePage } from "./components/Home/Homepage";
 import Navbar from "./components/Navbar/Navbar";
 import ProductPage from "./components/Products/ProductPage";
@@ -11,7 +12,8 @@ function App() {
       <main>
         {/* <HomePage /> */}
         {/* <ProductPage /> */}
-        <SingleProductPage />
+        {/* <SingleProductPage /> */}
+        <CartPage />
       </main>
     </div>
   );
