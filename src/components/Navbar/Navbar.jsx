@@ -1,5 +1,11 @@
 import "./Navbar.css";
 import rocket from "../../assets/rocket.png";
+import LinkWithIcon from "./LinkWithIcon";
+import star from "../../assets/glowing-star.png";
+import idButton from "../../assets/id-button.png";
+import memo from "../../assets/memo.png";
+import order from "../../assets/package.png";
+import lock from "../../assets/locked.png";
 
 const Navbar = () => {
   return (
@@ -20,9 +26,12 @@ const Navbar = () => {
       </div>
       {/* 메뉴들 */}
       <div className="align_center navbar_links">
-        <a href="#" className="align_center">
-          Home <img src={rocket} alt="" className="link_emoji" />
-        </a>
+        <LinkWithIcon title="홈페이지" link="/" emoji={rocket} />
+        <LinkWithIcon title="상품들" link="/products" emoji={star} />
+        <LinkWithIcon title="로그인" link="/login" emoji={idButton} />
+        <LinkWithIcon title="가입" link="/signup" emoji={memo} />
+        <LinkWithIcon title="내주문" link="/myorders" emoji={order} />
+        <LinkWithIcon title="로그아웃" link="/logout" emoji={lock} />
       </div>
     </nav>
   );
