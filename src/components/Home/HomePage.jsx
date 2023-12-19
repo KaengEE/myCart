@@ -2,6 +2,7 @@ import React from "react";
 import HeroSection from "./HeroSection";
 import iphone from "../../assets/iphone-14-pro.webp";
 import mac from "../../assets/mac-system-cut.jfif";
+import FeaturedProducts from "./FeaturedProducts";
 
 export const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ export const HomePage = () => {
         image={iphone}
       />
       {/* 상품들 */}
+      <FeaturedProducts />
       {/* 히어로섹션 */}
       <HeroSection
         title="궁극의 장비를 세팅하세요"
