@@ -2,6 +2,7 @@ import "./App.css";
 import { HomePage } from "./components/Home/Homepage";
 import Navbar from "./components/Navbar/Navbar";
 import ProductPage from "./components/Products/ProductPage";
+import SingleProductPage from "./components/SingleProduct/SingleProductPage";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Navbar />
       <main>
         {/* <HomePage /> */}
-        <ProductPage />
+        {/* <ProductPage /> */}
+        <SingleProductPage />
       </main>
     </div>
   );
