@@ -1,0 +1,5 @@
+.app {
+  /* grid는 열(가로) 또는 줄(세로)로 나눔 */
+  display: grid;
+  grid-template-rows: 80px auto; /* row:세로 위아래로 나눔 */
+}
