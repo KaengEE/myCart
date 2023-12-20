@@ -3,6 +3,7 @@ import "./ProductsList.css";
 import useData from "../../Hook/useData";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import { useSearchParams } from "react-router-dom";
+import Pagination from "../Common/Pagination";
 
 //상품 리스트
 const ProductsList = () => {
@@ -59,9 +60,16 @@ const ProductsList = () => {
               stock={product.stock}
             />
           ))}
-        {/* 페이징 */}
-        <button onClick={() => handlePageChange(2)}>페이지 2</button>
       </div>
+      {/* 페이지네이션 */}
+      {data && (
+        <Pagination
+          total={data.totalProducts}
+          perPage={8}
+          onClick={handlePageChange}
+          currentPage={page}
+        />
+      )}
     </section>
   );
 };
