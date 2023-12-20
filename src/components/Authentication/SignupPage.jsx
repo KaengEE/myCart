@@ -15,10 +15,16 @@ const SignupPage = () => {
     formState: { errors },
     watch,
   } = useForm();
+  //에러메시지
+  const [formError, setFormError] = useState("");
 
   //submit함수 : form 입력창에 작성한 데이터 객체 formData와 profilePic을 signup 함수에 전달
   const submitData = async (formData) => {
-    await signup(formData, profilePic);
+    try {
+      await signup(formData, profilePic);
+    } catch (err) {
+      setFormError(err.response.data.message);
+    }
   };
 
   return (
@@ -139,7 +145,8 @@ const SignupPage = () => {
             )}
           </div>
         </div>
-
+        {/* 에러메시지 */}
+        {formError && <em className="form_error">{formError}</em>}
         <button className="search_button form_submit" type="submit">
           Submit
         </button>
