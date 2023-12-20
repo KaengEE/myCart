@@ -12,6 +12,9 @@ const SingleProductPage = () => {
   const { data: product, error, isLoading } = useData(`/products/${id}`);
   //console.log(product);
 
+  //구매개수
+  const [quantity, setQuantity] = useState(1);
+
   return (
     <section className="align_center single_product">
       {error && <em className="form_error">{error}</em>}
@@ -46,7 +49,11 @@ const SingleProductPage = () => {
             </p>
             <h2 className="quantity_title">구매개수:</h2>
             <div className="align_center quantity_input">
-              <QuantityInput />
+              <QuantityInput
+                quantity={quantity}
+                setQuantity={setQuantity}
+                stock={product.stock}
+              />
             </div>
             <button className="search_button add_cart">장바구니 추가</button>
           </div>
