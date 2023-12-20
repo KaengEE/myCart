@@ -9,17 +9,26 @@ const ProductsList = () => {
   //쿼리스트링
   const [search, setSearch] = useSearchParams();
   const category = search.get("category");
+  const page = search.get("page");
 
   const { data, error, isLoading } = useData(
     "/products",
     {
       params: {
         category,
+        page,
       },
     },
-    [category]
+    [category, page]
   );
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  //페이지가 변경되면
+  const handlePageChange = (page) => {
+    const currentParams = Object.fromEntries([...search]);
+    //search 파라미터에서 page값만 업데이트
+    setSearch({ ...currentParams, page: page });
+  };
 
   return (
     <section className="products_list_section">
@@ -50,6 +59,8 @@ const ProductsList = () => {
               stock={product.stock}
             />
           ))}
+        {/* 페이징 */}
+        <button onClick={() => handlePageChange(2)}>페이지 2</button>
       </div>
     </section>
   );
