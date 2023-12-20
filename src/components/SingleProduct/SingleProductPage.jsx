@@ -3,6 +3,7 @@ import "./SingleProductPage.css";
 import QuantityInput from "./QuantityInput";
 import { useParams } from "react-router-dom";
 import useData from "../../Hook/useData";
+import Loader from "../Common/Loader";
 
 const SingleProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0); //초기값 0
@@ -14,6 +15,7 @@ const SingleProductPage = () => {
   return (
     <section className="align_center single_product">
       {error && <em className="form_error">{error}</em>}
+      {isLoading && <Loader />}
       {product._id && (
         <>
           <div className="align_center">
