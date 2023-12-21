@@ -4,7 +4,11 @@ import Navbar from "./components/Navbar/Navbar";
 import Routing from "./components/Routing/Routing";
 import { jwtDecode } from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { addToCartAPI, getCartAPI } from "./Services/cartService";
+import {
+  addToCartAPI,
+  getCartAPI,
+  removeFromCartAPI,
+} from "./Services/cartService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserContext from "./contexts/userContext";
@@ -67,6 +71,11 @@ function App() {
     const oldCart = [...cart];
     const newCart = oldCart.filter((item) => item.product._id !== id);
     setCart(newCart);
+
+    //백엔드서버에서 삭제
+    removeFromCartAPI(id).catch((err) => {
+      toast.error("장바구니 상품 삭제 에러");
+    });
   };
 
   //로컬에 저장된 토큰 가져오기
