@@ -1,5 +1,6 @@
 import apiClient from "../utils/api-client";
 
+//회원가입
 export async function signup(user, profile) {
   const body = new FormData();
   body.append("name", user.name);
@@ -8,5 +9,16 @@ export async function signup(user, profile) {
   body.append("deliveryAddress", user.deliveryAddress);
   body.append("profilePic", profile);
 
-  await apiClient.post("/user/signup", body);
+  const { data } = await apiClient.post("/user/signup", body);
+  localStorage.setItem("token", data.token);
+}
+
+//로그인
+export async function login(user) {
+  const body = new FormData();
+  body.append("email", user.email);
+  body.append("password", user.password);
+
+  const { data } = await apiClient.post("/user/login", user);
+  localStorage.setItem("token", data.token);
 }

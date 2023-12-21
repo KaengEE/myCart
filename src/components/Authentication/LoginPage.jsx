@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { login } from "../../Services/userService";
 import "./LoginPage.css";
 import { useForm } from "react-hook-form";
 
@@ -9,7 +11,19 @@ const LoginPage = () => {
     //유효성 검증 error
     formState: { errors },
   } = useForm();
-  const submitData = (formData) => console.log(formData);
+  //에러메시지
+  const [formError, setFormError] = useState("");
+
+  //로그인
+  const submitData = async (formData) => {
+    try {
+      await login(formData);
+      //홈으로이동
+      window.location = "/";
+    } catch (err) {
+      setFormError(err.response.data.message);
+    }
+  };
 
   return (
     <section className="align_center form_page">
@@ -47,7 +61,8 @@ const LoginPage = () => {
               <em className="form_error">{errors.password.message}</em>
             )}
           </div>
-
+          {/* 에러메시지 */}
+          {formError && <em className="form_error">{formError}</em>}
           <button type="submit" className="search_button form_submit">
             Submit
           </button>
