@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./SingleProductPage.css";
 import QuantityInput from "./QuantityInput";
 import { useParams } from "react-router-dom";
 import useData from "../../Hook/useData";
 import Loader from "../Common/Loader";
+import CartContext from "../../contexts/cartContext";
 
-const SingleProductPage = ({ addToCart }) => {
+const SingleProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0); //초기값 0
   const { id } = useParams(); //주소변수 pathVariable 받기
   //특정 id의 정보만 가져옴
   const { data: product, error, isLoading } = useData(`/products/${id}`);
-  //console.log(product);
-
+  //cartContext
+  const { addToCart } = useContext(CartContext);
   //구매개수
   const [quantity, setQuantity] = useState(1);
 
