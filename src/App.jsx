@@ -5,7 +5,15 @@ import Routing from "./components/Routing/Routing";
 import { jwtDecode } from "jwt-decode";
 
 function App() {
+  //유저정보
   const [user, setUser] = useState(null);
+  //장바구니
+  const [cart, setCart] = useState([]);
+
+  //장바구니추가
+  const addToCart = (product, quantity) => {
+    setCart([...cart, { product, quantity }]);
+  };
 
   //로컬에 저장된 토큰 가져오기
   useEffect(() => {
@@ -24,9 +32,9 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar user={user} />
+      <Navbar user={user} cartCount={cart.length} />
       <main>
-        <Routing />
+        <Routing addToCart={addToCart} />
       </main>
     </div>
   );

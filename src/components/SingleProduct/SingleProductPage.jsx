@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import useData from "../../Hook/useData";
 import Loader from "../Common/Loader";
 
-const SingleProductPage = () => {
+const SingleProductPage = ({ addToCart }) => {
   const [selectedImage, setSelectedImage] = useState(0); //초기값 0
   const { id } = useParams(); //주소변수 pathVariable 받기
   //특정 id의 정보만 가져옴
@@ -55,7 +55,12 @@ const SingleProductPage = () => {
                 stock={product.stock}
               />
             </div>
-            <button className="search_button add_cart">장바구니 추가</button>
+            <button
+              className="search_button add_cart"
+              onClick={() => addToCart(product, quantity)}
+            >
+              장바구니 추가
+            </button>
           </div>
         </>
       )}
