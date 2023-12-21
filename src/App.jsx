@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Routing from "./components/Routing/Routing";
 import { jwtDecode } from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { addToCartAPI } from "./Services/cartService";
+import { addToCartAPI, getCartAPI } from "./Services/cartService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -44,6 +44,22 @@ function App() {
       });
   };
 
+  //장바구니정보가져오기
+  const getCart = () => {
+    getCartAPI()
+      .then((res) => {
+        setCart(res.data);
+      })
+      .catch((err) => {
+        toast.error("카트 가져오기에 실패했습니다.");
+      });
+  };
+
+  //시작할때, user가 바뀌면 장바구니정보 가져오기
+  useEffect(() => {
+    getCart();
+  }, [user]);
+
   //로컬에 저장된 토큰 가져오기
   useEffect(() => {
     try {
@@ -64,7 +80,7 @@ function App() {
       <Navbar user={user} cartCount={cart.length} />
       <main>
         <ToastContainer position="bottom-right" />
-        <Routing addToCart={addToCart} />
+        <Routing addToCart={addToCart} cart={cart} />
       </main>
     </div>
   );
