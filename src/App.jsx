@@ -12,8 +12,7 @@ function App() {
     try {
       const jwt = localStorage.getItem("token");
       const jwtUser = jwtDecode(jwt);
-      setUser(jwtUser);
-      //토큰 유효 시간
+      //토큰 유효 시간과 현재시간을 비교해서 만료된 토큰은 삭제
       if (Date.now() >= jwtUser.exp * 1000) {
         localStorage.removeItem("token");
         location.reload();
