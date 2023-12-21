@@ -12,7 +12,20 @@ function App() {
 
   //장바구니추가
   const addToCart = (product, quantity) => {
-    setCart([...cart, { product, quantity }]);
+    //id가 동일한 배열이 있으면 update
+    const updatedCart = [...cart];
+    //findIndex는 모든 배열아이템과 비교해서 참일경우 인덱스번호가 return 거짓일경우 -1
+    const productIndex = updatedCart.findIndex(
+      (item) => item.product._id === product._id
+    );
+    //같은 배열이 없으면 새로추가(push)
+    if (productIndex === -1) {
+      updatedCart.push({ product: product, quantity: quantity });
+    } else {
+      //같은 배열이 있으면 그 배열에 수량 추가
+      updatedCart[productIndex].quantity += quantity;
+    }
+    setCart(updatedCart);
   };
 
   //로컬에 저장된 토큰 가져오기
