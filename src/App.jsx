@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Routing from "./components/Routing/Routing";
 import { jwtDecode } from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
+import { addToCartAPI } from "./Services/cartService";
 
 setAuthToken(localStorage.getItem("token"));
 
@@ -29,6 +30,15 @@ function App() {
       updatedCart[productIndex].quantity += quantity;
     }
     setCart(updatedCart);
+
+    //백엔드서버에도 저장
+    addToCartAPI(product._id, quantity)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
 
   //로컬에 저장된 토큰 가져오기
