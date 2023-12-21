@@ -13,7 +13,7 @@ const CartPage = () => {
   //유저정보
   const user = useContext(UserContext);
   //cartContext
-  const { cart, addToCart } = useContext(CartContext);
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
 
   useEffect(() => {
     let total = 0;
@@ -46,11 +46,13 @@ const CartPage = () => {
                 <QuantityInput quantity={quantity} stock={product.stock} />
               </td>
               <td>{(quantity * product.price).toLocaleString("ko-KR")} 원</td>
+              {/* 삭제 */}
               <td>
                 <img
                   src={remove}
                   alt="remove icon"
                   className="cart_remove_icon"
+                  onClick={() => removeFromCart(product._id)}
                 />
               </td>
             </tr>

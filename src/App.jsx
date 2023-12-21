@@ -62,6 +62,13 @@ function App() {
     getCart();
   }, [user]);
 
+  //장바구니 삭제
+  const removeFromCart = (id) => {
+    const oldCart = [...cart];
+    const newCart = oldCart.filter((item) => item.product._id !== id);
+    setCart(newCart);
+  };
+
   //로컬에 저장된 토큰 가져오기
   useEffect(() => {
     try {
@@ -79,7 +86,7 @@ function App() {
 
   return (
     <UserContext.Provider value={user}>
-      <CartContext.Provider value={{ cart, addToCart }}>
+      <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
         <div className="app">
           <Navbar user={user} cartCount={cart.length} />
           <main>
