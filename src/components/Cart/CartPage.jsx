@@ -6,6 +6,7 @@ import QuantityInput from "../SingleProduct/QuantityInput";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/userContext";
 import CartContext from "../../contexts/cartContext";
+import { checkoutAPI } from "../../Services/orderService";
 
 const CartPage = () => {
   //합계
@@ -13,7 +14,21 @@ const CartPage = () => {
   //유저정보
   const user = useContext(UserContext);
   //cartContext
-  const { cart, removeFromCart, updateCart } = useContext(CartContext);
+  const { cart, removeFromCart, updateCart, setCart } = useContext(CartContext);
+
+  //체크아웃함수
+  const checkout = () => {
+    const oldCart = [...cart];
+    setCart([]); //카트 비우기(모두삭제)
+    checkoutAPI()
+      .then(() => {
+        toast.success("주문 성공!");
+      })
+      .catch(() => {
+        toast.error("checkout 중 에러발생.");
+        setCart(oldCart); //실패시 복구
+      });
+  };
 
   useEffect(() => {
     let total = 0;
@@ -83,7 +98,9 @@ const CartPage = () => {
         </tbody>
       </table>
 
-      <button className="search_button checkout_button">결제하기</button>
+      <button className="search_button checkout_button" onClick={checkout}>
+        결제하기
+      </button>
     </section>
   );
 };
