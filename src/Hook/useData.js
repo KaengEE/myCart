@@ -12,12 +12,10 @@ const useData = (endpoint, customConfig, deps) => {
       apiClient
         .get(endpoint, customConfig)
         .then((res) => {
-          setData(res.data);
-          setIsLoading(false);
+          setData(res.data), setIsLoading(false);
         })
         .catch((err) => {
-          setError(err.message);
-          setIsLoading(false);
+          setError(err.message), setIsLoading(false);
         });
     },
     deps ? deps : []
