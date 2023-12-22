@@ -63,9 +63,9 @@ function App() {
       });
   };
 
-  //시작할때, user가 바뀌면 장바구니정보 가져오기
+  //유저가 있을때, user가 바뀌면 장바구니정보 가져오기
   useEffect(() => {
-    getCart();
+    if (user) getCart();
   }, [user]);
 
   //장바구니 삭제
