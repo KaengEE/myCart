@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/userContext";
 import CartContext from "../../contexts/cartContext";
 import { checkoutAPI } from "../../Services/orderService";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
   //합계
