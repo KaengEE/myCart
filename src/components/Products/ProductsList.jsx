@@ -9,6 +9,8 @@ import Pagination from "../Common/Pagination";
 const ProductsList = () => {
   //쿼리스트링
   const [search, setSearch] = useSearchParams();
+  const searchQuery = search.get("search");
+
   const category = search.get("category");
   const page = search.get("page");
 
@@ -16,11 +18,12 @@ const ProductsList = () => {
     "/products",
     {
       params: {
+        search: searchQuery,
         category,
         page,
       },
     },
-    [category, page]
+    [searchQuery, category, page]
   );
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 

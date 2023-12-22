@@ -6,19 +6,38 @@ import idButton from "../../assets/id-button.png";
 import memo from "../../assets/memo.png";
 import order from "../../assets/package.png";
 import lock from "../../assets/locked.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Navbar = ({ user, cartCount }) => {
+  //검색
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  //검색메서드
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //공백이 아닐경우 검색
+    if (search.trim() !== "") {
+      navigate(`/products?search=${search.trim()}`);
+      //검색 후 초기화
+      setSearch("");
+    }
+  };
   return (
     <nav className="align_center navbar">
       <div className="align_center">
         <h1 className="navbar_heading">myCart</h1>
         {/* 검색창 */}
-        <form className="align_center navbar_form">
+        <form className="align_center navbar_form" onSubmit={handleSubmit}>
           <input
             type="text"
             className="navbar_search"
             placeholder="제품 찾기..."
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
           />
           <button type="submit" className="search_button">
             검색하기
