@@ -4,7 +4,7 @@ import iphone from "../../assets/iphone-14-pro.webp";
 import mac from "../../assets/mac-system-cut.jfif";
 import FeaturedProducts from "./FeaturedProducts";
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <div>
       {/* 히어로섹션 */}
@@ -26,3 +26,5 @@ export const HomePage = () => {
     </div>
   );
 };
+
+export default HomePage;

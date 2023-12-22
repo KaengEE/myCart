@@ -7,7 +7,7 @@ import CartPage from "../Cart/CartPage";
 import MyOrderPage from "../MyOrder/MyOrderPage";
 import Logout from "../Authentication/Logout";
 import ProtectedRoute from "./ProtectedRoute";
-import { HomePage } from "../Home/Homepage";
+import HomePage from "../Home/Homepage";
 
 const Routing = ({ user }) => {
   return (
