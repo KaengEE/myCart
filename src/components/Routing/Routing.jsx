@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { HomePage } from "../Home/Homepage";
 import ProductPage from "../Products/ProductPage";
 import SingleProductPage from "../SingleProduct/SingleProductPage";
 import SignupPage from "../Authentication/SignupPage";
@@ -8,6 +7,7 @@ import CartPage from "../Cart/CartPage";
 import MyOrderPage from "../MyOrder/MyOrderPage";
 import Logout from "../Authentication/Logout";
 import ProtectedRoute from "./ProtectedRoute";
+import HomePage from "../Home/Homepage";
 
 const Routing = ({ user }) => {
   return (
