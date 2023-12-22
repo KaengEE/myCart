@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CartContext from "../../contexts/cartContext";
 import UserContext from "../../contexts/userContext";
+import config from "../../config.json";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
@@ -15,7 +16,7 @@ const ProductCard = ({ product }) => {
       <div className="product_image">
         <Link to={`/product/${product?._id}`}>
           <img
-            src={`http://localhost:5000/products/${product?.images[0]}`}
+            src={`${config.backendURL}/products/${product?.images[0]}`}
             alt={product?.title}
           />
         </Link>
