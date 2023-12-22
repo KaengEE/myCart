@@ -14,3 +14,11 @@ export async function getCartAPI() {
 export function removeFromCartAPI(id) {
   return apiClient.patch(`/cart/remove/${id}`);
 }
+
+//장바구니 상품 수량 증가, 감소
+export function increaseProductAPI(id) {
+  return apiClient.patch(`/cart/increase/${id}`);
+}
+export function decreaseProductAPI(id) {
+  return apiClient.patch(`/cart/decrease/${id}`);
+}

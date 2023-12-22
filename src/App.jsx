@@ -6,7 +6,9 @@ import { jwtDecode } from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import {
   addToCartAPI,
+  decreaseProductAPI,
   getCartAPI,
+  increaseProductAPI,
   removeFromCartAPI,
 } from "./Services/cartService";
 import { ToastContainer, toast } from "react-toastify";
@@ -78,6 +80,37 @@ function App() {
     });
   };
 
+  //장바구니상품 증가 감소 함수
+  const updateCart = (type, id) => {
+    const updatedCart = [...cart]; //내용만 카피
+
+    //참일경우 인덱스 번호가 return
+    const productIndex = updatedCart.findIndex(
+      (item) => item.product._id === id
+    );
+
+    //증가
+    if (type === "increase") {
+      updatedCart[productIndex].quantity += 1;
+      setCart(updatedCart);
+
+      //백엔드
+      increaseProductAPI(id).catch((err) => {
+        toast.error("상품 증가 에러");
+      });
+    }
+    //감소
+    if (type === "decrease") {
+      updatedCart[productIndex].quantity -= 1;
+      setCart(updatedCart);
+
+      //백엔드
+      decreaseProductAPI(id).catch((err) => {
+        toast.error("상품 감소 에러");
+      });
+    }
+  };
+
   //로컬에 저장된 토큰 가져오기
   useEffect(() => {
     try {
@@ -95,7 +128,9 @@ function App() {
 
   return (
     <UserContext.Provider value={user}>
-      <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+      <CartContext.Provider
+        value={{ cart, addToCart, removeFromCart, updateCart }}
+      >
         <div className="app">
           <Navbar user={user} cartCount={cart.length} />
           <main>

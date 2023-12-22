@@ -13,7 +13,7 @@ const CartPage = () => {
   //유저정보
   const user = useContext(UserContext);
   //cartContext
-  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+  const { cart, removeFromCart, updateCart } = useContext(CartContext);
 
   useEffect(() => {
     let total = 0;
@@ -43,7 +43,13 @@ const CartPage = () => {
               <td>{product.title}</td>
               <td>{product.price.toLocaleString("ko-KR")} 원</td>
               <td className="align_center table_quantity_input">
-                <QuantityInput quantity={quantity} stock={product.stock} />
+                <QuantityInput
+                  quantity={quantity}
+                  stock={product.stock}
+                  setQuantity={updateCart}
+                  cartPage={true}
+                  productId={product._id}
+                />
               </td>
               <td>{(quantity * product.price).toLocaleString("ko-KR")} 원</td>
               {/* 삭제 */}
